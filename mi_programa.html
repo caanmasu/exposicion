@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title>Mi programa</title>
+	</head>
+	<body>
+		<h1>Buscar</h1><br><br>
+		<label>Tipo: </label>
+			<select id="mi_select">
+				<option value="musica">Música</option>
+				<option value="pelicula">Película</option>
+				<option value="tv">TV</option>
+				<option value="libro">Libro</option>
+			</select>
+			<br><br>
+		<label>Id: </label><input type="number" name="entrada" id="entrada"/><br><br>
+		<input type="submit" onclick="isObjeto(document.getElementById('entrada').value)"/><br><br>
+		<h3 id="resultado">Resultado</h3><br><br>
+	</body>
+	<script src="./Expo/music.js"></script>
+	<script src="./Expo/movie.js"></script>
+	<script src="./Expo/tv.js"></script>
+	<script src="./Expo/book.js"></script>
+	<script src="./Expo/facade.js"></script>
+	
+	<script>		
+		function isObjeto(valor){
+			valor = parseInt(valor);
+			
+			switch (document.getElementById("mi_select").selectedIndex){
+				case 0:
+					const music = new CultureFacade(TYPE_MUSIC);
+					music.get(valor)
+						.then(data => console.log(data))
+						.catch(e => console.error(e));
+						alert(music.get(valor).then());
+					document.getElementById("resultado").innerHTML = music.get(valor).then();
+					break;
+				case 1: 
+					const movie = new CultureFacade(TYPE_MOVIE);
+					movie.get(valor)
+						.then(data => console.log(data))
+						.catch(e => console.error(e));
+					break;
+				case 2:
+					const tv = new CultureFacade(TYPE_TV);
+					tv.get(valor)
+						.then(data => console.log(data))
+						.catch(e => console.error(e));
+					break;
+				case 3:
+					const book = new CultureFacade(TYPE_BOOK);
+					book.get(valor)
+						.then(data => console.log(data))
+						.catch(e => console.error(e));
+					break;
+			}
+		}
+	</script>
+</html>
